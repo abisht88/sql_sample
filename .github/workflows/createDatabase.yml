@@ -1,0 +1,9 @@
+name: createDatabase
+run-name: setting up the new database
+on: [push]
+jobs:
+  test-output:
+    runs-on: ubuntu-latest
+    steps:
+      -name: Test output
+      run: echo "here is the test"
