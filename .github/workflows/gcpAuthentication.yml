@@ -1,0 +1,35 @@
+name: gcp authentication
+on:
+  workflow_dispatch
+  # push:
+  #   branches:
+  #     - main
+jobs:
+  deploy-dev:
+    runs-on: ubuntu-latest
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint. New
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v3
+      - name: Configure GCP credentials
+        id: auth
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: "projects/381351396040/locations/global/workloadIdentityPools/github-action-pool/providers/github-action"
+          service_account: "github-action-sa@card-service-dev-454416.iam.gserviceaccount.com"
+          token_format: "access_token"
+      - name: Echo stuff
+        run: printenv
+      - name: Setup GCloud SDK
+        uses: "google-github-actions/setup-gcloud@v1"
+        with:
+          version: ">= 363.0.0"
+      - name: List Compute Networks
+        run: |-
+          echo "Displaying networks"
+          gcloud compute networks list
+          echo "Displaying subnets for my-awesome-vpc-network network"
+          gcloud compute networks subnets list --network my-awesome-vpc-network
