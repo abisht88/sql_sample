@@ -29,5 +29,5 @@ jobs:
 
       - name: "install psql package"
         run: |
-          apt install postgresql
+          sudo apt install postgresql
           echo "finished psql package installation"  
