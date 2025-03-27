@@ -14,13 +14,10 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@v3
+
       - name: Configure GCP credentials
-        id: auth
-        uses: google-github-actions/auth@v1
-        with:
-          workload_identity_provider: "projects/381351396040/locations/global/workloadIdentityPools/github-action-pool/providers/github-action"
-          service_account: "gcp-auth-sa@card-service-dev-454416.iam.gserviceaccount.com"
-          token_format: "access_token"
+        uses: ./.github/actions/auth_to_gcp
+
       - name: Echo stuff
         run: printenv
       - name: Setup GCloud SDK
