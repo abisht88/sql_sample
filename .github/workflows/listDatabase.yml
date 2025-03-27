@@ -20,12 +20,15 @@ jobs:
         run:  curl -o cloud-sql-proxy https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.15.2/cloud-sql-proxy.linux.amd64
 
       - name: "Start-cloud-sql-proxy"
-        run:  chmod +x ./cloud-sql-proxy
-          
-              echo "------cloud sql proxy------"
-              
-              ./cloud-sql-proxy --address 0.0.0.0 --port 5432 card-service-dev-454416:asia-east1:card-db --psc &
-            
-              echo "SQL Proxy Connection Established"
-              
-              sleep 10
+        run:  |
+          chmod +x ./cloud-sql-proxy
+          echo "------cloud sql proxy------"
+          ./cloud-sql-proxy --address 0.0.0.0 --port 5432 card-service-dev-454416:asia-east1:card-db --psc &
+          echo "SQL Proxy Connection Established"
+          sleep 10
+
+      - name: "install psql package"
+        run: |
+          apt-get update
+          apt-get install --yes --no-install-recommends postgresql-client
+          echo "finished psql package installation"  
