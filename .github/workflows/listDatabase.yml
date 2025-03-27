@@ -1,0 +1,27 @@
+name: createDatabase
+run-name: setting up the new database
+on:
+  workflow_dispatch
+jobs:
+  test-output:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v3
+
+      - name: "Configure GCP credentials"
+        uses: ./.github/actions/auth_to_gcp
+
+      - name: "Download-cloud-sql-proxy"
+        run:  curl -o cloud-sql-proxy https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.15.2/cloud-sql-proxy.linux.amd64
+
+      - name: "Start-cloud-sql-proxy"
+        run:  chmod +x ./cloud-sql-proxy
+          
+              echo "------cloud sql proxy------"
+              
+              ./cloud-sql-proxy --address 0.0.0.0 --port 5432 card-service-dev-454416:asia-east1:card-db --psc &
+            
+              echo "SQL Proxy Connection Established"
+              
+              sleep 10
