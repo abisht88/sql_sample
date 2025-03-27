@@ -1,4 +1,4 @@
-name: gcp authentication
+name: List Compute Networks
 on:
   workflow_dispatch
   # push:

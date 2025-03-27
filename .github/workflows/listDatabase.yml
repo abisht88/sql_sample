@@ -1,4 +1,4 @@
-name: createDatabase
+name: Create Database
 run-name: setting up the new database
 on:
   workflow_dispatch
