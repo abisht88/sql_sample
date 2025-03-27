@@ -3,8 +3,12 @@ run-name: setting up the new database
 on:
   workflow_dispatch
 jobs:
-  test-output:
+  deploy-dev:
     runs-on: ubuntu-latest
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint. New
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: "Checkout"
         uses: actions/checkout@v3
