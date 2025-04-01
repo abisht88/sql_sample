@@ -27,7 +27,16 @@ jobs:
           echo "SQL Proxy Connection Established"
           sleep 10
 
-      - name: "install psql package"
+      - name: "Install psql package"
         run: |
           sudo apt install postgresql
-          echo "finished psql package installation"  
+          echo "finished psql package installation" 
+
+      - name: "Install dependencies"
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libpq-dev
+
+      - name: "Run PostgreSQL commands"
+        run: |
+          psql -c SELECT datname FROM pg_database
