@@ -37,6 +37,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libpq-dev
 
+      - name: "Set postgres pass"
+        run: |
+          export PGPASSWORD=postgres
+
       - name: "Run PostgreSQL commands"
+        shell: bash
         run: |
           psql -h 127.0.0.1 -d postgres -p 5432 -U postgres -c "SELECT datname FROM pg_database"
