@@ -1,0 +1,22 @@
+name: init_pg_client
+description: installs pg client
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Install psql package"
+      shell: bash
+      run: |
+        sudo apt install postgresql
+        echo "finished psql package installation" 
+
+    - name: "Install dependencies"
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libpq-dev
+
+    - name: "Set postgres pass"
+      shell: bash
+      run: |
+        export PGPASSWORD=postgres

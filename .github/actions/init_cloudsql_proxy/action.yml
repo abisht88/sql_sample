@@ -1,0 +1,18 @@
+name: init_cloudsql_proxy
+description: installs cloudsql proxy
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Download-cloud-sql-proxy"
+      shell: bash
+      run: curl -o cloud-sql-proxy https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.15.2/cloud-sql-proxy.linux.amd64
+
+    - name: "Start-cloud-sql-proxy"
+      shell: bash
+      run: |
+        chmod +x ./cloud-sql-proxy
+        echo "------cloud sql proxy------"
+        ./cloud-sql-proxy --address 0.0.0.0 --port 5432 card-service-dev-454416:asia-east1:card-db --psc &
+        echo "SQL Proxy Connection Established"
+        sleep 10
