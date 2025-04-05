@@ -1,5 +1,5 @@
 name: test_here
-run-name: ${{ github.workflow}} ($ {{ github.event.inputs.environment }}) (${{ github.event.inputs.pipelinesa }})
+run-name: ${{ github.workflow}} (${{ github.event.inputs.environment }}) (${{ github.event.inputs.pipelinesa }})
 on:
 
   workflow_dispatch:
