@@ -14,6 +14,7 @@ runs:
       shell: bash
       run: |
         ls -l
+        echo ${{ inputs. ENV_PATH_FILE }}
         PROJECT_ID=yq '.PROJECT_ID' ${{ inputs. ENV_PATH_FILE }}
         
         echo "PROJECT_ID=${PROJECT_ID}" >> $GITHUB_ENV
