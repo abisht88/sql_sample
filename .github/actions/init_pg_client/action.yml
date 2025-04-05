@@ -19,4 +19,5 @@ runs:
     - name: "Set postgres pass"
       shell: bash
       run: |
+        echo psql --version
         export PGPASSWORD=postgres
