@@ -19,4 +19,4 @@ runs:
       shell: bash
       run: |
         echo "${{ inputs.ENV_PATH_FILE }}"
-        echo "yq --version"
+        yq --version
