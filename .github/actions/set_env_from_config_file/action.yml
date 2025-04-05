@@ -20,5 +20,6 @@ runs:
       run: |
         echo "${{ inputs.ENV_PATH_FILE }}"
         python --version
-        yq --version
-        yq '.PROJECT_ID' ${{ inputs. ENV_PATH_FILE }}
+        PROJECT_ID=yq '.PROJECT_ID' ${{ inputs. ENV_PATH_FILE }}
+        
+        echo "PROJECT_ID={PROJECT_ID}" >> GIT_HUB
