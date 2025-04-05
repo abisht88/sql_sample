@@ -1,5 +1,9 @@
-name: init_pg_client
-description: installs pg client
+name: set_env_from_config_file
+description: config env from config file
+inputs:
+  ENV_PATH_FILE:
+    description: "location of config file"
+    required: true
 
 runs:
   using: "composite"
@@ -13,8 +17,4 @@ runs:
     - name: "Config file read"
       shell: bash
       run: |
-        ls -l
-        echo ${{ inputs. ENV_PATH_FILE }}
-        PROJECT_ID=yq '.PROJECT_ID' ${{ inputs. ENV_PATH_FILE }}
-        
-        echo "PROJECT_ID=${PROJECT_ID}" >> $GITHUB_ENV
+        echo "${{ inputs.ENV_PATH_FILE }}"

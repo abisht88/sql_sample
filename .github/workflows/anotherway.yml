@@ -39,3 +39,5 @@ jobs:
 
       - name: "Set env vars from config file"
         uses: ./.github/actions/set_env_from_config_file
+        with:
+          ENV_PATH_FILE: ${{ env.ENVIRONMENT_FILE }}
