@@ -1,0 +1,19 @@
+name: init_pg_client
+description: installs pg client
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Install yq package"
+      shell: bash
+      run: |
+        sudo apt install yq
+        echo "finished yq package installation" 
+
+    - name: "Config file read"
+      shell: bash
+      run: |
+        ls -l
+        PROJECT_ID=$(./yq e .PROJECT_ID ${{ inputs. ENV_PATH_FILE }})
+        
+        echo "PROJECT_ID=${PROJECT_ID}" >> $GITHUB_ENV

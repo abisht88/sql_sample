@@ -1,0 +1,41 @@
+name: test_here
+run-name: ${{ github.workflow}} ($ {{ github.event.inputs.environment }}) (${{ github.event.inputs.pipelinesa }})
+on:
+
+  workflow_dispatch:
+    inputs:
+      pipelinesa:
+        description: "Pipeline sa to use"
+        default: "sql-deploy"
+        type: choice
+        required: true
+        options:
+          - "sql-deploy"
+      environment:
+        description: "Environment to apply changes"
+        default: "dev"
+        type: choice
+        required: true
+        options:
+          - "dev"
+
+env:
+  DEV_INT_PIPELINE_SA: dev/${{ github.event.inputs.pipelinesa }}
+  ENVIRONMENT_FILE: "$GITHUB_WORKSPACE/conf/dbc_${{ inputs.ENVIRONMENT}}.yml"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v3
+
+      - name: "Configure GCP credentials"
+        uses: ./.github/actions/auth_to_gcp
+
+      - name: "Set env vars from config file"
+        uses: ./.github/actions/set_env_from_config_file
