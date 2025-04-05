@@ -21,3 +21,4 @@ runs:
         echo "${{ inputs.ENV_PATH_FILE }}"
         python --version
         yq --version
+        yq '.PROJECT_ID' ${{ inputs. ENV_PATH_FILE }}
