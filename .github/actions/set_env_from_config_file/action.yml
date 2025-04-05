@@ -11,6 +11,7 @@ runs:
     - name: "Install yq package"
       shell: bash
       run: |
+        sudo apt-get update
         sudo apt install yq
         echo "finished yq package installation" 
 
@@ -18,7 +19,7 @@ runs:
       shell: bash
       run: |
         echo "${{ inputs.ENV_PATH_FILE }}"
-        echo "yq -V"
+        echo "yq --version"
         PROJECT_ID=yq '.PROJECT_ID' ${{ inputs. ENV_PATH_FILE }}
         
         echo "PROJECT_ID=${PROJECT_ID}" >> $GITHUB_ENV
